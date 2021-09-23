@@ -9,6 +9,8 @@ public class HairbookApplication {
 
 	// test 2
 	// test 7
+
+
 	public static void main(String[] args) {
 		SpringApplication.run(HairbookApplication.class, args);
 	}
