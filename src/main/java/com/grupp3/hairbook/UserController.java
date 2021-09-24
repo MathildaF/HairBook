@@ -39,6 +39,13 @@ public class UserController {
         return userService.updateUser(user);
     }
 
+    @DeleteMapping()
+    public User deleteUser(@RequestBody User user){
+        userList.remove(user.getId() -1);
+
+        return userService.updateUser(user);
+    }
+
     //Hårdkodad lista för övning
     @GetMapping("/list")
     public  List<String> getList() {
