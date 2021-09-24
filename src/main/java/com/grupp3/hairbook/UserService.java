@@ -1,14 +1,13 @@
 package com.grupp3.hairbook;
 
 import org.springframework.stereotype.Service;
-
 import java.util.Arrays;
 import java.util.List;
 
 @Service
 public class UserService {
 
-    List<User> userList = Arrays.asList(
+    List<User> userList  = Arrays.asList(
             new User(1, "name1"),
             new User(2, "name2"),
             new User(3, "name3")
@@ -18,7 +17,6 @@ public class UserService {
     }
 
     public User addUser(User user) {
-        userList.add(user);
         return user;
     }
     public void updateUser(){
@@ -26,4 +24,5 @@ public class UserService {
 
     }
 
+// {"id": 10,"name": "firstName41"}
 }

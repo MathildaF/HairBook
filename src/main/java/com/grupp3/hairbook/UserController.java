@@ -21,8 +21,8 @@ public class UserController {
         return userService.getUsers();
     }
     @PostMapping()
-    public void addUser(@RequestBody User user){
-        userService.addUser(user);
+    public User addUser(@RequestBody User user){
+        return userService.addUser(user);
     }
 
     //Hårdkodad lista för övning
