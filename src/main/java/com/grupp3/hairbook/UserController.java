@@ -32,6 +32,12 @@ public class UserController {
         userList.add(user);
         return userService.addUser(user);
     }
+    @PutMapping()
+    public User updateUser(@RequestBody User user){
+
+        userList.set(user.getId() -1, user);
+        return userService.updateUser(user);
+    }
 
     //Hårdkodad lista för övning
     @GetMapping("/list")

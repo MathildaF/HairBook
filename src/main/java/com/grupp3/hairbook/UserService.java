@@ -15,8 +15,8 @@ public class UserService {
     public User addUser(User user) {
         return user;
     }
-    public void updateUser(){
-        User user = new User(7, "hej hej");
+    public User updateUser(User user){
+        return user;
     }
 
 // {"id": 10,"name": "firstName41"}
