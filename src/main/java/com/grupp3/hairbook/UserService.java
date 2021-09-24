@@ -7,21 +7,16 @@ import java.util.List;
 @Service
 public class UserService {
 
-    List<User> userList  = Arrays.asList(
-            new User(1, "name1"),
-            new User(2, "name2"),
-            new User(3, "name3")
-    );
-    public List<User> getUsers() {
+
+
+    public List<User> getUsers(List<User> userList) {
         return userList;
     }
-
     public User addUser(User user) {
         return user;
     }
     public void updateUser(){
         User user = new User(7, "hej hej");
-
     }
 
 // {"id": 10,"name": "firstName41"}
