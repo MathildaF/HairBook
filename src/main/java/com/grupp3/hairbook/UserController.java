@@ -27,6 +27,7 @@ public class UserController {
         List<User> userList = this.userList;
         return userService.getUsers(userList);
     }
+
     @PostMapping()
     public User addUser(@RequestBody User user){
         userList.add(user);
@@ -34,7 +35,6 @@ public class UserController {
     }
     @PutMapping()
     public User updateUser(@RequestBody User user){
-
         userList.set(user.getId() -1, user);
         return userService.updateUser(user);
     }
@@ -42,8 +42,7 @@ public class UserController {
     @DeleteMapping()
     public User deleteUser(@RequestBody User user){
         userList.remove(user.getId() -1);
-
-        return userService.updateUser(user);
+        return userService.deleteUser(user);
     }
 
     //Hårdkodad lista för övning
