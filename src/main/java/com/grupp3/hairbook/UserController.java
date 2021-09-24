@@ -20,6 +20,10 @@ public class UserController {
     public List<User> getUsers() {
         return userService.getUsers();
     }
+    @PostMapping()
+    public void addUser(@RequestBody User user){
+        userService.addUser(user);
+    }
 
     //Hårdkodad lista för övning
     @GetMapping("/list")
