@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api") //gammal metod? //
+@RequestMapping("/api")
 public class UserController {
     private final UserService userService;
 
@@ -28,25 +28,22 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     public User getUser(@PathVariable Long id) {
-        return this.userService
-                .getUsers()                             //Alla användare
-                .stream()                              //Hämtar alla i listan
-                .filter(user -> user.getId()==id)      //for loop som returnar när den hittar id på användare
-                .findFirst()                           //returnerar första resultatet i loopen
-                .orElse(null);                   // & hittar den ingen returnerar den null
+        return this.userService.getUser(id);
     }
 
-    @PostMapping("/user") //Create
+    //Create
+    @PostMapping("/user")                            //I Headers måste man ha (KEY)Content-type samt (VALUE)application/json
     public User addUser(@RequestBody User user){
         return this.userService.addUser(user);
     }
-    @PutMapping() //Update
+    //Update
+    @PutMapping("/user")                             //I Headers måste man ha (KEY)Content-type samt (VALUE)application/json
     public User updateUser(@RequestBody User user){
         return userService.updateUser(user);
     }
 
-    @DeleteMapping()
-    public User deleteUser(@RequestBody User user){
-        return userService.deleteUser(user);
+    @DeleteMapping("/user/{id}")
+    public User deleteUser(@PathVariable Long id){
+        return userService.deleteUser(id);
     }
 }

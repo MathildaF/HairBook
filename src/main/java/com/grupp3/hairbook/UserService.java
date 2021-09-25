@@ -15,6 +15,14 @@ public class UserService {
         return this.userList;
     }
 
+    public User getUser(Long id) {
+        return this.getUsers()                         //Alla användare
+                .stream()                              //Hämtar alla i listan
+                .filter(user -> user.getId()==id)      //for loop som returnar när den hittar id på användare
+                .findFirst()                           //returnerar första resultatet i loopen
+                .orElse(null);                    // & hittar den ingen returnerar den null
+    }
+
     public User addUser(User user) {
         this.userList.add(user);
 
@@ -34,9 +42,24 @@ public class UserService {
         .orElse(null);
     }
 
-    public User deleteUser(User user){
+    public User deleteUser(Long id){
 
-        return user;
+        User user = this.getUsers().stream().filter(deleteUser -> {
+            if (deleteUser.getId()==id) {
+                return true;
+            } else {
+                return false;
+            }
+        })
+        .findFirst()
+        .orElse(null);
+
+        if (user != null) {
+            this.userList.remove(user);
+            return user;
+        } else {
+            return null;
+        }
     }
 
 }
