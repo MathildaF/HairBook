@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users") //gammal metod?
+@RequestMapping("/api") //gammal metod? //
 public class UserController {
     private final UserService userService;
 
@@ -22,10 +22,15 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping()
+    @GetMapping("/users")
     public List<User> getUsers() {
         List<User> userList = this.userList;
         return userService.getUsers(userList);
+    }
+
+    @GetMapping("/user/{id}")
+    public User getUser(@PathVariable Long id) {
+        return this.userList.stream().filter(user -> user.getId()==id).findFirst().orElse(null);
     }
 
     @PostMapping()
