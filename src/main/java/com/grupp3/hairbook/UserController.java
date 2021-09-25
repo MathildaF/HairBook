@@ -12,69 +12,41 @@ import java.util.List;
 public class UserController {
     private final UserService userService;
 
-    List<User> userList = new ArrayList<>(Arrays.asList(
-            new User(1, "name1"),
-            new User(2, "name2"),
-            new User(3, "name3")));
-
     @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
+
+        this.userService.addUser(new User(1, "name1"));
+        this.userService.addUser(new User(2, "name2"));
+        this.userService.addUser(new User(3, "name3"));
     }
 
     @GetMapping("/users")
     public List<User> getUsers() {
-        List<User> userList = this.userList;
-        return userService.getUsers(userList);
+        return userService.getUsers();
     }
 
     @GetMapping("/user/{id}")
     public User getUser(@PathVariable Long id) {
-        return this.userList.stream().filter(user -> user.getId()==id).findFirst().orElse(null);
+        return this.userService
+                .getUsers()                             //Alla användare
+                .stream()                              //Hämtar alla i listan
+                .filter(user -> user.getId()==id)      //for loop som returnar när den hittar id på användare
+                .findFirst()                           //returnerar första resultatet i loopen
+                .orElse(null);                   // & hittar den ingen returnerar den null
     }
 
-    @PostMapping()
+    @PostMapping("/user") //Create
     public User addUser(@RequestBody User user){
-        userList.add(user);
-        return userService.addUser(user);
+        return this.userService.addUser(user);
     }
-    @PutMapping()
+    @PutMapping() //Update
     public User updateUser(@RequestBody User user){
-        userList.set(user.getId() -1, user);
         return userService.updateUser(user);
     }
 
     @DeleteMapping()
     public User deleteUser(@RequestBody User user){
-        userList.remove(user.getId() -1);
         return userService.deleteUser(user);
     }
-
-    //Hårdkodad lista för övning
-    @GetMapping("/list")
-    public  List<String> getList() {
-        List<String> listTest = Arrays.asList("Item1", "Item2", "Item3");
-        return listTest;
-    }
-
-    @GetMapping("/test")
-    public String getUser() {
-        return "GET request";
-    }
-
-    @PostMapping("/test")
-    public String postUsers() {
-        return "POST request";
-    }
-
-    @PutMapping("/test")
-    public String updateUsers() {
-        return "UPDATE request";
-    }
-
-    @DeleteMapping("/test")
-    public String deleteUsers() {
-        return "DELETE request";
-    }
-
 }
