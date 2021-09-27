@@ -9,6 +9,6 @@ public class HairbookApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(HairbookApplication.class, args);
-	}
+	} 
 
 }

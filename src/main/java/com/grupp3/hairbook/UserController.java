@@ -3,8 +3,7 @@ package com.grupp3.hairbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 
 @RestController
@@ -32,7 +31,7 @@ public class UserController {
     }
 
     //Create
-    @PostMapping("/user") //I Headers måste man ha (KEY)Content-type samt (VALUE)application/json
+    @PostMapping("/user") //I Headers måste man ha (KEY)Content-type samt (VALUE)text/plain
     public User addUser(@RequestBody String name){
         return this.userService.addUser(new User(name));
     }

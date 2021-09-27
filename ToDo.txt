@@ -1,0 +1,7 @@
+
+
+1. Vid sökning som ej ger träff, skicka tillbaka not-found bild i response, kanske från det där katt-repot? Då har vi uppfyllt 2 MEME types
+2. Implementera databas
+3. Projektet ska ha ett tema. (Business, meddelande system). Har vi det??
+4. Säkerhet, vad har vi för tankar?
+5. Skapa powerpoint samt hur vi presenterar
