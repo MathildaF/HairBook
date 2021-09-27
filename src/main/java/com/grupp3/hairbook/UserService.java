@@ -31,28 +31,32 @@ public class UserService {
 
     public User updateUser(User user){
 
-        return this.getUsers().stream().filter(updateUser -> {
-            if (updateUser.getId()==user.getId()) {
-                updateUser.setName(user.getName());
-                return true;
-            }
-                return false;
-        })
-        .findFirst()
-        .orElse(null);
+        return this.getUsers()
+                .stream()
+                .filter(updateUser -> {
+                    if (updateUser.getId()==user.getId()) {
+                        updateUser.setName(user.getName());
+                        return true;
+                    }
+                    return false;
+                })
+                .findFirst()
+                .orElse(null);
     }
 
     public User deleteUser(Long id){
 
-        User user = this.getUsers().stream().filter(deleteUser -> {
-            if (deleteUser.getId()==id) {
-                return true;
-            } else {
-                return false;
-            }
-        })
-        .findFirst()
-        .orElse(null);
+        User user = this.getUsers()
+                .stream()
+                .filter(deleteUser -> {
+                    if (deleteUser.getId()==id) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                })
+                .findFirst()
+                .orElse(null);
 
         if (user != null) {
             this.userList.remove(user);

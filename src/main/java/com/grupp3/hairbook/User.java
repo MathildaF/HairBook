@@ -1,22 +1,25 @@
 package com.grupp3.hairbook;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 public class User {
 
-    private int id;
+    private static AtomicLong idGenerator = new AtomicLong(1);
+    private long id;
     private String name;
 //    private String email;
 //    private String password;
 
-    public User(int id, String name) {
-        this.id = id;
+    public User(String name) {
+        this.id = idGenerator.getAndIncrement();
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

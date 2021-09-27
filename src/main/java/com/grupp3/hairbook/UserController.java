@@ -16,9 +16,9 @@ public class UserController {
     public UserController(UserService userService) {
         this.userService = userService;
 
-        this.userService.addUser(new User(1, "name1"));
-        this.userService.addUser(new User(2, "name2"));
-        this.userService.addUser(new User(3, "name3"));
+        this.userService.addUser(new User( "name1"));
+        this.userService.addUser(new User( "name2"));
+        this.userService.addUser(new User( "name3"));
     }
 
     @GetMapping("/users")
@@ -32,18 +32,26 @@ public class UserController {
     }
 
     //Create
-    @PostMapping("/user")                            //I Headers måste man ha (KEY)Content-type samt (VALUE)application/json
-    public User addUser(@RequestBody User user){
-        return this.userService.addUser(user);
+    @PostMapping("/user") //I Headers måste man ha (KEY)Content-type samt (VALUE)application/json
+    public User addUser(@RequestBody String name){
+        return this.userService.addUser(new User(name));
     }
+//    @PostMapping()
+//    public User addUser(@RequestBody User user){
+//        userList.add(user);
+//        return userService.addUser(user);
+//    }
+
     //Update
     @PutMapping("/user")                             //I Headers måste man ha (KEY)Content-type samt (VALUE)application/json
     public User updateUser(@RequestBody User user){
+
         return userService.updateUser(user);
     }
 
     @DeleteMapping("/user/{id}")
     public User deleteUser(@PathVariable Long id){
+
         return userService.deleteUser(id);
     }
 }
