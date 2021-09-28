@@ -1,10 +1,18 @@
 package com.grupp3.hairbook;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api")
@@ -21,34 +29,52 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public List<User> getUsers() {
-        return userService.getUsers();
+    public ResponseEntity<List<User>> getUsers() {
+        List<User> users = userService.getUsers();
+        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
     }
 
     @GetMapping("/user/{id}")
-    public User getUser(@PathVariable Long id) {
-        return this.userService.getUser(id);
+    public ResponseEntity<User> getUser(@PathVariable Long id) {
+        try{
+            User user = userService.getUserById(id);
+            return new ResponseEntity<>(user, HttpStatus.OK);
+        } catch (NoSuchElementException e){
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }
+
+    }
+
+    @GetMapping("/hello")
+    public @ResponseBody String getText() {
+        return "Hello all bad hair dayers!";
     }
 
     //Create
-    @PostMapping("/user") //I Headers måste man ha (KEY)Content-type samt (VALUE)text/plain
-    public User addUser(@RequestBody String name, boolean hasBadHairDay){
-        return this.userService.addUser(new User(name, hasBadHairDay));
+    @PostMapping("/user") //I Headers måste man ha (KEY)Content-type samt (VALUE)application/json
+    public User addUser(@RequestBody UserModel userModel){
+        return this.userService.addUser(new User(userModel.getName(), userModel.isHasBadHairDay()));
     }
-//    @PostMapping()
-//    public User addUser(@RequestBody User user){
-//        userList.add(user);
-//        return userService.addUser(user);
-//    }
 
     //Update
-    @PutMapping("/user") //I Headers måste man ha (KEY)Content-type samt (VALUE)application/json
-    public User updateUser(@RequestBody User user){
-        return userService.updateUser(user);
+    @PutMapping("/user/{id}")    // id i sökväg                         //I Headers måste man ha (KEY)Content-type samt (VALUE)application/json
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserModel usermodel){
+
+        try{
+            return new ResponseEntity<>(userService.updateUser(id, usermodel), HttpStatus.OK);
+        } catch (NoSuchElementException e){
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/user/{id}")
-    public User deleteUser(@PathVariable Long id){
-        return userService.deleteUser(id);
+
+    public ResponseEntity<User> deleteUser(@PathVariable Long id){
+        try{
+            return new ResponseEntity<>(userService.deleteUser(id), HttpStatus.OK);
+        } catch(NoSuchElementException e){
+            return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+        }
+
     }
 }

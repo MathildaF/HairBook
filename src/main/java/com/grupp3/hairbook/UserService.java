@@ -3,6 +3,7 @@ package com.grupp3.hairbook;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -20,30 +21,39 @@ public class UserService {
                 .findFirst()                           //returnerar första resultatet i loopen
                 .orElse(null);                    // & hittar den ingen returnerar den null
     }
+    public User getUserById(long id) {
+        Optional<User> optionalUser = this.getUsers()
+                .stream()
+                .filter(user -> user.getId()==id)
+                .findFirst();
+        return optionalUser.get();
+
+        }
 
     public User addUser(User user) {
         this.userList.add(user);
         return user;
     }
 
-    public User updateUser(User user){
+    public User updateUser(Long id, UserModel usermodel){
 
-        return this.getUsers()
+        Optional<User> optionalUser = this.getUsers()
                 .stream()
                 .filter(updateUser -> {
-                    if (updateUser.getId()==user.getId()) {
-                        updateUser.setName(user.getName());
+                    if (updateUser.getId()==id) {
+                        updateUser.setName(usermodel.getName());
+                        updateUser.setHasBadHairDay(usermodel.isHasBadHairDay());
                         return true;
                     }
                     return false;
                 })
-                .findFirst()
-                .orElse(null);
+                .findFirst();
+        return optionalUser.get();
     }
 
     public User deleteUser(Long id){
 
-        User user = this.getUsers()
+        Optional<User> optionalUser = this.getUsers()
                 .stream()
                 .filter(deleteUser -> {
                     if (deleteUser.getId()==id) {
@@ -52,15 +62,12 @@ public class UserService {
                         return false;
                     }
                 })
-                .findFirst()
-                .orElse(null);
+                .findFirst();
 
-        if (user != null) {
-            this.userList.remove(user);
-            return user;
-        } else {
-            return null;
+        if (optionalUser.isPresent()) {
+            this.userList.remove(optionalUser.get());
         }
+        return optionalUser.get();
     }
 
 }
