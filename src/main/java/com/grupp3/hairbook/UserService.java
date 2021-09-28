@@ -23,7 +23,6 @@ public class UserService {
 
     public User addUser(User user) {
         this.userList.add(user);
-
         return user;
     }
 
