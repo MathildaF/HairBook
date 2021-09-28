@@ -5,3 +5,5 @@
 3. Projektet ska ha ett tema. (Business, meddelande system). Har vi det??
 4. Säkerhet, vad har vi för tankar?
 5. Skapa powerpoint samt hur vi presenterar
+6. Update-metod funkar inte sedan vi skapat auto-genererat id.
+7. errorhandling vid post,update,delete bad requests.
