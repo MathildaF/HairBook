@@ -17,7 +17,7 @@ public class UserController {
 
         this.userService.addUser(new User( "name1", true));
         this.userService.addUser(new User( "name2", false));
-        this.userService.addUser(new User( "name3", true));
+        this.userService.addUser(new User( "name3", false));
     }
 
     @GetMapping("/users")
@@ -33,7 +33,6 @@ public class UserController {
     //Create
     @PostMapping("/user") //I Headers måste man ha (KEY)Content-type samt (VALUE)text/plain
     public User addUser(@RequestBody String name, boolean hasBadHairDay){
-
         return this.userService.addUser(new User(name, hasBadHairDay));
     }
 //    @PostMapping()
