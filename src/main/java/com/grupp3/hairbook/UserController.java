@@ -1,16 +1,10 @@
 package com.grupp3.hairbook;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -26,6 +20,11 @@ public class UserController {
         this.userService.addUser(new User( "name1", true));
         this.userService.addUser(new User( "name2", false));
         this.userService.addUser(new User( "name3", false));
+    }
+
+    @GetMapping(value = "/MIME", produces = "text/plain")
+    public String getMessage() {
+        return "Hello Fabulous!";
     }
 
     @GetMapping("/users")
@@ -57,7 +56,7 @@ public class UserController {
     }
 
     //Update
-    @PutMapping("/user/{id}")    // id i sökväg                         //I Headers måste man ha (KEY)Content-type samt (VALUE)application/json
+    @PutMapping("/user/{id}")    //I Headers måste man ha (KEY)Content-type samt (VALUE)application/json
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserModel usermodel){
 
         try{
