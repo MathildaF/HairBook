@@ -2,7 +2,6 @@ package com.grupp3.hairbook;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-
 public class User {
 
     private static final AtomicLong idGenerator = new AtomicLong(1);
@@ -10,10 +9,12 @@ public class User {
     private String name;
 //    private String email;
 //    private String password;
+    private boolean hasBadHairDay;
 
-    public User(String name) {
+    public User(String name, boolean hasBadHairDay) {
         this.id = idGenerator.getAndIncrement();
         this.name = name;
+        this.hasBadHairDay = hasBadHairDay;
     }
 
     public long getId() {
@@ -32,6 +33,13 @@ public class User {
         this.name = name;
     }
 
+    public boolean isHasBadHairDay() {
+        return hasBadHairDay;
+    }
+
+    public void setHasBadHairDay(boolean hasBadHairDay) {
+        this.hasBadHairDay = hasBadHairDay;
+    }
 //    public String getEmail() {
 //        return email;
 //    }
