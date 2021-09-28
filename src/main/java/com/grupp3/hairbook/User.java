@@ -2,9 +2,10 @@ package com.grupp3.hairbook;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+
 public class User {
 
-    private static AtomicLong idGenerator = new AtomicLong(1);
+    private static final AtomicLong idGenerator = new AtomicLong(1);
     private long id;
     private String name;
 //    private String email;
