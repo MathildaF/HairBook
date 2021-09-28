@@ -2,6 +2,7 @@ package com.grupp3.hairbook;
 
 import java.util.concurrent.atomic.AtomicLong;
 
+
 public class User {
 
     private static final AtomicLong idGenerator = new AtomicLong(1);
@@ -40,6 +41,8 @@ public class User {
     public void setHasBadHairDay(boolean hasBadHairDay) {
         this.hasBadHairDay = hasBadHairDay;
     }
+
+
 //    public String getEmail() {
 //        return email;
 //    }
